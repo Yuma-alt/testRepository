@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="UTF-8">
+<title th:text="${title}">Insert title here</title>
+</head>
+<body>
+<h1 th:text="${title}">title</h1>
+<!-- <p>入力内容をご確認ください</p>
+<p th:text="${inquiryForm.name}"></p> -->
+<!-- ＊で中のフィールドの値をしようすることができる -->
+<div th:object="${inquiryForm}">
+<p th:text="*{name}"></p>
+<p th:text="*{email}"></p>
+<p th:text="*{contents}"></p>
+<form method="post" action="#" th:action="@{/inquiry/form}">
+	<!-- hiddenで入力値を確認している -->
+	<!-- 戻るボタンにも値を表示させる状態にしておく -->
+	<input type="hidden" name="name" th:value="*{name}">
+	<input type="hidden" name="email" th:value="*{email}">
+	<input type="hidden" name="contents" th:value="*{contents}">
+	<input type="submit" value="Go Back">
+</form>
+<!-- th:action内の値がURLに反映され「＠」はドメイン名を表示させる役割を持っている -->
+<form method="post" action="#" th:action="@{/inquiry/complete}">
+	<input type="hidden" name="name" th:value="*{name}">
+	<input type="hidden" name="email" th:value="*{email}">
+	<input type="hidden" name="contents" th:value="*{contents}">
+	<input type="submit" value="Complete">
+</form>
+</div>
+</body>
+</html>

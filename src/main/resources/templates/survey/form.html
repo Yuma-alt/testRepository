@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title th:text="${title}">Insert title here</title>
+</head>
+<body>
+<!-- <div th:replace="~{block/header::headerA}"></div>
+<h1 th:text="${title}">仮のタイトル</h1>
+<div th:if="${param.complete}" >
+	更新が完了しました。
+</div> -->
+<!-- <h2 th:text="${complete}"></h2> -->
+<h1 th:text="${title}">title</h1>
+<h2 th:text="${complete}"></h2>
+<!-- th:object="${inquiryForm}"により、inquiryFormの値を丸ごとHTML側へ持っていくことができる。 -->
+<form method="post" action="#" th:action="@{/survey/confirm}" th:object="${surveyForm}">
+	<label for="name">年齢 :</label>
+	<!-- ※valueの値に「$」はつけない -->
+	<input id="age" name="age" type="number" th:value="*{age}"><br>
+	<div th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></div>
+	<!-- <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div> -->
+	<label for="email">満足度 :</label>
+	<input name="satisfaction" type="radio" value="1" th:checked="*{satisfaction == 1}">1
+	<input name="satisfaction" type="radio" value="2" th:checked="*{satisfaction == 2}">2
+	<input name="satisfaction" type="radio" value="3" th:checked="*{satisfaction == 3}">3
+	<input name="satisfaction" type="radio" value="4" th:checked="*{satisfaction == 4}">4
+	<input name="satisfaction" type="radio" value="5" th:checked="*{satisfaction == 5}">5<br>
+	<div th:if="${#fields.hasErrors('satisfaction')}" th:errors="*{satisfaction}"></div>
+	<label for="comment">コメント :</label>
+	<textarea name="comment" id="comment" rows="3" cols="40" th:field="*{comment}"></textarea><br>
+	<div th:if="${#fields.hasErrors('comment')}" th:errors="*{comment}"></div>
+	<input type="submit" value="Confirm">
+	
+</form>
+</body>
+</html>
